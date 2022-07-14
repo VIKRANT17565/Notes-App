@@ -8,9 +8,10 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/noteRecyclerView"
+        android:id="@+id/notesRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        tools:listitem="@layout/activity_notes"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
