@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             data.add(noteData)
         }
 
+
         val adapter = NotesAdapter(data)
         notesRecyclerView.adapter = adapter
 
