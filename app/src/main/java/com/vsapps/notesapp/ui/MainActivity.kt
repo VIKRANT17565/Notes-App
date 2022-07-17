@@ -26,14 +26,6 @@ class MainActivity : AppCompatActivity(), INotesAdapter {
         val notesRecyclerView:RecyclerView = findViewById(R.id.notesRecyclerView)
         notesRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-//        val data = ArrayList<NoteData>()
-//        for (i in 0 until 100) {
-//            val noteData = NoteData(
-//                "Title $i",
-//                "Note $i"
-//            )
-//            data.add(noteData)
-//        }
 
         val adapter = NotesAdapter(this, this)
         notesRecyclerView.adapter = adapter
