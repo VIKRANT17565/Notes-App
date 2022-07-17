@@ -1,31 +1,54 @@
 package com.vsapps.notesapp.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vsapps.notesapp.R
+import com.vsapps.notesapp.roomDatabase.NoteEntity
 
-class NotesAdapter(private val notes:ArrayList<NoteData>):RecyclerView.Adapter<NotesViewHolder>() {
+class NotesAdapter(private val context: Context, private val listener: INotesAdapter):RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
+
+    private val notesArrayList = ArrayList<NoteEntity>()
+
+    inner class NotesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val title:TextView? = itemView.findViewById(R.id.title)
+        val notes:TextView? = itemView.findViewById(R.id.notes)
+        val clickable:TextView = itemView.findViewById(R.id.clickable)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_notes, parent, false)
-        return NotesViewHolder(view)
+        val viewHolder = NotesViewHolder(LayoutInflater.from(context).inflate(R.layout.activity_notes_recycler, parent, false))
+        viewHolder.clickable.setOnClickListener{
+            listener.onItemClick(notesArrayList[viewHolder.adapterPosition])
+        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
-        val currentNote = notes[position]
-        holder.title.text = currentNote.title
-        holder.notes.text = currentNote.note
+        val currentNote = notesArrayList[position]
+        holder.title?.text = currentNote.title
+        holder.notes?.text = currentNote.note
     }
 
     override fun getItemCount(): Int {
-        return notes.size
+        return notesArrayList.size
     }
+
+    fun updateList(newList:List<NoteEntity>){
+        notesArrayList.clear()
+        notesArrayList.addAll(newList)
+
+        notifyDataSetChanged()
+    }
+
 }
 
-class NotesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val title:TextView = itemView.findViewById(R.id.title)
-    val notes:TextView = itemView.findViewById(R.id.notes)
+
+
+interface INotesAdapter {
+    fun onItemClick(note: NoteEntity)
 }
+
