@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(), INotesAdapter {
 
         viewModel.notes.observe(this, Observer { list-> list?.let{
             adapter.updateList(it)
+            println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ $it")
         }
         })
         println("updated#############################################################")

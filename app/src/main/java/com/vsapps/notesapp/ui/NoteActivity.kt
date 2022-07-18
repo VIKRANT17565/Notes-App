@@ -62,10 +62,22 @@ class NoteActivity : AppCompatActivity() {
 
                 val delay: Long = 0
                 println(delay)
+
+                val noteEntity = NoteEntity(titleInput, noteInput)
+
+                viewModel  = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
+                viewModel.insertNote(noteEntity)
+
                 val intent = Intent(this, NoteNotification::class.java)
+
+                val bundle = Bundle()
+                bundle.putSerializable("noteEntity", noteEntity)
 
                 intent.putExtra("title", titleInput)
                 intent.putExtra("note", noteInput)
+
+                intent.putExtra("bundle",bundle)
+                println("noteEntity $noteEntity")
 
 
                 val pendingIntent = PendingIntent.getBroadcast(this, dateTimeToMs.toInt(), intent,PendingIntent.FLAG_CANCEL_CURRENT)
@@ -74,9 +86,6 @@ class NoteActivity : AppCompatActivity() {
 
 
 //                alarmManager.set(AlarmManager.RTC_WAKEUP, dateTimeToMs + delay, pendingIntent)
-
-                viewModel  = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
-                viewModel.insertNote(NoteEntity(titleInput, noteInput))
 
                 Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show()
 

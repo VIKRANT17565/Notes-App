@@ -1,19 +1,21 @@
 package com.vsapps.notesapp.ui
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.vsapps.notesapp.R
 import com.vsapps.notesapp.roomDatabase.NoteEntity
 import com.vsapps.notesapp.roomDatabase.NoteViewModel
+import java.util.ArrayList
 
 class NoteDescriptionActivity : AppCompatActivity() {
 
     lateinit var viewModel: NoteViewModel
+    var notesArrayList  = ArrayList<NoteEntity>()
+    var noteEntityIndex :Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,10 @@ class NoteDescriptionActivity : AppCompatActivity() {
             note = "No description"
         }
 
+
+
+
+
         val deleteNote:ImageView = findViewById(R.id.deleteNote)
 
         val titleText:TextView = findViewById(R.id.title)
@@ -35,17 +41,30 @@ class NoteDescriptionActivity : AppCompatActivity() {
         noteText.text = note
 
 
-//        NoteEntity(title=iysiyx, note=7tsigdiyd)
-//        NoteEntity(title=iysiyx, note=7tsigdiyd)
-
         deleteNote.setOnClickListener {
-            viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[NoteViewModel::class.java]
+            viewModel  = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[NoteViewModel::class.java]
+
+            println("%%%%%%%%%%%%%%%%%%%%%%%%%% $noteEntity")
+
             viewModel.deleteNote(noteEntity)
-            println("##################################################################################################Deleted")
-            println(noteEntity)
+            println("################################################################################################## deleted")
             finish()
         }
 
 
+    }
+
+
+    private fun updateList(newList: List<NoteEntity>, index: Int){
+        println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@##################################################### $newList")
+        notesArrayList.clear()
+        notesArrayList.addAll(newList)
+        noteEntityIndex = index
+
+        println("updateList #")
+        println(notesArrayList)
+        println(noteEntityIndex)
+
+        viewModel.deleteNote(notesArrayList.get(noteEntityIndex))
     }
 }

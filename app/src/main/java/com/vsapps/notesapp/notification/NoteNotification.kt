@@ -8,6 +8,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.vsapps.notesapp.R
 import com.vsapps.notesapp.roomDatabase.NoteEntity
+import com.vsapps.notesapp.ui.MainActivity
 import com.vsapps.notesapp.ui.NoteDescriptionActivity
 
 
@@ -20,19 +21,25 @@ class NoteNotification: BroadcastReceiver(){
 
     override fun onReceive(context: Context, intent: Intent) {
 
+        val bundle = intent.getBundleExtra("bundle")
+
+
         var title = intent.getStringExtra("title").toString()
         var note = intent.getStringExtra("note").toString()
+        println("title $title")
+        println("note $note")
         if (note.isEmpty()){
             note = "No description"
         }
 
+        var noteEntity:NoteEntity = bundle?.getSerializable("noteEntity") as NoteEntity
+        println("noteEntity $noteEntity")
 
-        val noteEntity = NoteEntity(title, note)
 
-        val newIntent = Intent(context, NoteDescriptionActivity::class.java)
+        val newIntent = Intent(context, MainActivity::class.java)
         newIntent.putExtra("title", title)
         newIntent.putExtra("note", note)
-        newIntent.putExtra("noteEntity", noteEntity)
+        newIntent.putExtra("noteEntity", bundle.getSerializable("noteEntity") as NoteEntity)// noteEntity)
         val pendingIntent = PendingIntent.getActivity(context, 0, newIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
         var builder = NotificationCompat.Builder(context, CHANNEL_ID)

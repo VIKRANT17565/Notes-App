@@ -75,21 +75,18 @@ class DateTime(private val noteView: NoteActivity): DatePickerDialog.OnDateSetLi
         val dateTime:TextView = noteView.findViewById(R.id.date_time)
         dateTime.setOnClickListener {
 
-            DatePickerDialog(noteView, this, year, month, day, ).show()
+            val dp = DatePickerDialog(noteView, this, year, month, day)
+            dp.datePicker.minDate = System.currentTimeMillis()
+            dp.show()
 
         }
-
-//        val date: ImageButton = noteView.findViewById(R.id.select_date_time)
-//        date.setOnClickListener {
-//
-//            DatePickerDialog(noteView, this, year, month, day, ).show()
-//
-//        }
 
         val date: ImageView = noteView.findViewById(R.id.select_date_time)
         date.setOnClickListener {
 
-            DatePickerDialog(noteView, this, year, month, day, ).show()
+            val dp = DatePickerDialog(noteView, this, year, month, day)
+            dp.datePicker.minDate = System.currentTimeMillis()
+            dp.show()
 
         }
 
