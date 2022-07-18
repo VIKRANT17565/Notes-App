@@ -10,28 +10,28 @@ import java.util.*
 
 class DateTime(private val noteView: NoteActivity): DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
-    var format = DecimalFormat("00")
+    private var format = DecimalFormat("00")
 
 
-    var day = 0
-    var month = 0
-    var year =  0
-    var hour12 = 0
-    var hour24 = 0
-    var minute = 0
-    var AmPm = ""
+    private var day = 0
+    private var month = 0
+    private var year =  0
+    private var hour12 = 0
+    private var hour24 = 0
+    private var minute = 0
+    private var amPm = ""
 
 
-    var saveDay = 0
-    var saveMonth = 0
-    var saveYear =  0
-    var saveHour12 = 0
-    var saveHour24 = 0
-    var saveMinute = 0
-    var saveAmPm = ""
+    private var saveDay = 0
+    private var saveMonth = 0
+    private var saveYear =  0
+    private var saveHour12 = 0
+    private var saveHour24 = 0
+    private var saveMinute = 0
+    private var saveAmPm = ""
 
     init {
-        getDateTime()
+        dateTime()
     }
 
 
@@ -42,10 +42,10 @@ class DateTime(private val noteView: NoteActivity): DatePickerDialog.OnDateSetLi
         year = calendar.get(Calendar.YEAR)
         hour24 = calendar.get(Calendar.HOUR_OF_DAY)
         hour12 = calendar.get(Calendar.HOUR_OF_DAY)
-        if (hour12 >= 12){
-            AmPm = "PM"
+        amPm = if (hour12 >= 12){
+            "PM"
         }else{
-            AmPm = "AM"
+            "AM"
         }
         hour12 %= 12
         if (hour12 == 0){
@@ -54,23 +54,16 @@ class DateTime(private val noteView: NoteActivity): DatePickerDialog.OnDateSetLi
 
         minute = calendar.get(Calendar.MINUTE)
 
-//        saveDay = day
-//        saveMonth = month
-//        saveYear = year
-//        saveHour12 = hour12
-//        saveAmPm = AmPm
-//        saveMinute = minute
-
 
         val dateTime: TextView = noteView.findViewById(R.id.date_time)
-        dateTime.text = "${format.format(day)}/${format.format(month)}/${format.format(year)} , ${format.format(hour12)}:${format.format(minute)} $AmPm"
-        println("Curr Date : ${format.format(day)}/${format.format(month)}/${format.format(year)} , ${format.format(hour12)}:${format.format(minute)} $AmPm")
+        dateTime.text = "${format.format(day)}/${format.format(month)}/${format.format(year)} , ${format.format(hour12)}:${format.format(minute)} $amPm"
+        println("Curr Date : ${format.format(day)}/${format.format(month)}/${format.format(year)} , ${format.format(hour12)}:${format.format(minute)} $amPm")
 
         month -= 1
 
     }
 
-    private fun getDateTime() {
+    private fun dateTime() {
         getDateTimeCalender()
         val dateTime:TextView = noteView.findViewById(R.id.date_time)
         dateTime.setOnClickListener {
@@ -106,10 +99,10 @@ class DateTime(private val noteView: NoteActivity): DatePickerDialog.OnDateSetLi
     }
 
     override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {
-        if (hour >= 12){
-            saveAmPm = "PM"
+        saveAmPm = if (hour >= 12){
+            "PM"
         }else{
-            saveAmPm = "AM"
+            "AM"
         }
         saveHour24 = hour
         saveHour12 = hour%12
@@ -126,17 +119,17 @@ class DateTime(private val noteView: NoteActivity): DatePickerDialog.OnDateSetLi
         updateDateTime()
     }
 
-    fun updateDateTime(){
+    private fun updateDateTime(){
         day = saveDay
         month = saveMonth -1
         year = saveYear
         hour12 = saveHour12
         hour24 = saveHour24
         minute = saveMinute
-        AmPm = saveAmPm
+        amPm = saveAmPm
     }
 
-    fun getdateTime(): String {
+    fun getDateTime(): String {
         return "${format.format(day)}/${format.format(month+1)}/${format.format(year)} , ${format.format(hour24)}:${format.format(minute)}"
     }
 }

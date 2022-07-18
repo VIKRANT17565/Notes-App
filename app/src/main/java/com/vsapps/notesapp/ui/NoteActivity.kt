@@ -21,7 +21,7 @@ import java.util.*
 
 class NoteActivity : AppCompatActivity() {
 
-    lateinit var viewModel: NoteViewModel
+    private lateinit var viewModel: NoteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +33,6 @@ class NoteActivity : AppCompatActivity() {
         inputDescription.maxLines = 17
 
         val dt = DateTime(this)
-
-        val setDateTime: TextView = findViewById(R.id.date_time)
 
         val alarmManager:AlarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
 
@@ -48,13 +46,12 @@ class NoteActivity : AppCompatActivity() {
                 val note: TextInputLayout = findViewById(R.id.text_input_description)
                 val noteInput = note.editText?.text.toString()
 
-                val dateTime = dt.getdateTime()// + " GMT+05:30"
+                val dateTime = dt.getDateTime()
                 println(dateTime)
 
-//                16/06/2022 , 09:40 PM GMT+05:30
-                val formatter:SimpleDateFormat = SimpleDateFormat("dd/MM/yyyy , HH:mm", Locale.ENGLISH)
+                val formatter = SimpleDateFormat("dd/MM/yyyy , HH:mm", Locale.ENGLISH)
 
-                val dateTimeToMs :Long= formatter.parse(dateTime).time.toLong()
+                val dateTimeToMs :Long= formatter.parse(dateTime)!!.time
                 println(dateTimeToMs)
 
                 val timeOfNoteSaved: Long = System.currentTimeMillis()
@@ -65,7 +62,7 @@ class NoteActivity : AppCompatActivity() {
 
                 val noteEntity = NoteEntity(titleInput, noteInput)
 
-                viewModel  = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(NoteViewModel::class.java)
+                viewModel  = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[NoteViewModel::class.java]
                 viewModel.insertNote(noteEntity)
 
                 val intent = Intent(this, NoteNotification::class.java)
@@ -84,9 +81,6 @@ class NoteActivity : AppCompatActivity() {
 
                 SetAlarm(dateTimeToMs, pendingIntent, alarmManager)
 
-
-//                alarmManager.set(AlarmManager.RTC_WAKEUP, dateTimeToMs + delay, pendingIntent)
-
                 Toast.makeText(this, "Saved successfully", Toast.LENGTH_SHORT).show()
 
                 finish()
@@ -103,22 +97,12 @@ class NoteActivity : AppCompatActivity() {
     private fun validateTitle(): Boolean {
         val title:TextInputLayout = findViewById(R.id.text_input_title)
         val titleInput = title.editText?.text.toString()
-        if (titleInput.isEmpty()) {
+        return if (titleInput.isEmpty()) {
             title.error = "Field can't be empty"
-            return false
+            false
         } else {
             title.error = null
-            return true
+            true
         }
     }
-
-    private fun validateDescription(): String {
-        val note:TextInputLayout = findViewById(R.id.text_input_title)
-        val noteInput = note.editText?.text.toString()
-        if (noteInput.isEmpty()) {
-            return "No description"
-        }
-        return noteInput
-    }
-
 }

@@ -17,7 +17,7 @@ import com.vsapps.notesapp.roomDatabase.NoteViewModel
 
 class MainActivity : AppCompatActivity(), INotesAdapter {
 
-    lateinit var viewModel: NoteViewModel
+    private lateinit var viewModel: NoteViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +34,8 @@ class MainActivity : AppCompatActivity(), INotesAdapter {
 
         viewModel.notes.observe(this, Observer { list-> list?.let{
             adapter.updateList(it)
-            println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ $it")
         }
         })
-        println("updated#############################################################")
 
 
         val addNote:FloatingActionButton = findViewById(R.id.addNote)
@@ -50,14 +48,11 @@ class MainActivity : AppCompatActivity(), INotesAdapter {
     }
 
     override fun onItemClick(note: NoteEntity) {
-        println("######################################## $note")
         val intent = Intent(this, NoteDescriptionActivity::class.java)
         intent.putExtra("title", note.title)
         intent.putExtra("note", note.note)
         intent.putExtra("noteEntity", note)
         startActivity(intent)
-//        viewModel.deleteNote(note)
-//        Toast.makeText(this,"${note.text} Deleted", Toast.LENGTH_SHORT).show()
     }
 
 }
