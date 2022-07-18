@@ -18,6 +18,6 @@ The app will also push a notification on your smartphone whenever the note hit t
 |Home Screen| Note Editor | Notification| Description
 
 ### Light Mode
-| <img src="images/homeL.jpeg" width="200"/> | <img src="images/noteL.jpeg" width="200"/> | <img src="images/notificationL.jpeg" width="200"/> | <img src="images/descL.jpeg" width="200"/>
+| <img src="images/homeL.jpeg" width="200"/> | <img src="images/noteL.jpeg" width="200"/> | <img src="images/notificationL.jpeg" width="200"/> | 
 |:---:|:---:|:---:|
-|Home Screen| Note Editor | Notification| Description
+|Home Screen| Note Editor | Notification|
