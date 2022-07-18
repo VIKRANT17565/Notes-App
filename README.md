@@ -4,7 +4,19 @@ Notes App is an android application which help you to manage your schedules and 
 The app will also push a notification on your smartphone whenever the note hit the clock.
 
 ## Screenshots
-
-| <img src="images/homePage.jpeg" width="200"/> | <img src="images/noteDescription.jpeg" width="200"/> | <img src="images/notification.jpeg" width="200"/> |
+### Dark Mode
+| <img src="images/homeD.jpeg" width="200"/> | <img src="images/descD.jpeg" width="200"/> | <img src="images/notificationD.jpeg" width="200"/> |
 |:---:|:---:|:---:|
 |Home Screen| Note Editor | Notification|
+
+### Light Mode
+| <img src="images/homeL.jpeg" width="200"/> | <img src="images/descL.jpeg" width="200"/> | <img src="images/notificationL.jpeg" width="200"/> |
+|:---:|:---:|:---:|
+|Home Screen| Note Editor | Notification|
+
+
+## Features
+
+- Support light/dark mode
+- Easy to create notes and remindes
+- Push notifications
