@@ -1,5 +1,7 @@
 # Notes-App
 
+Notes App is an android application which help you to manage your schedules and notes.
+The app will also push a notification on your smartphone whenever the note hit the clock.
 
 ## Screenshots
 
