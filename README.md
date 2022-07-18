@@ -13,7 +13,7 @@ The app will also push a notification on your smartphone whenever the note hit t
 
 ## Screenshots
 ### Dark Mode
-| <img src="images/homeD.jpeg" width="200"/> | <img src="images/noteD.jpeg" width="200"/> | <img src="images/notificationD.jpeg" width="200"/> | <img src="images/descD.jpeg" width="200"/>
+| <img src="images/homeD.jpeg" width="150"/> | <img src="images/noteD.jpeg" width="150"/> | <img src="images/notificationD.jpeg" width="150"/> | <img src="images/descD.jpeg" width="150"/>
 |:---:|:---:|:---:|
 |Home Screen| Note Editor | Notification| Description
 
