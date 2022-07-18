@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity(), INotesAdapter {
         val intent = Intent(this, NoteDescriptionActivity::class.java)
         intent.putExtra("title", note.title)
         intent.putExtra("note", note.note)
+        intent.putExtra("dateTime", note.dateTime)
         intent.putExtra("noteEntity", note)
         startActivity(intent)
     }

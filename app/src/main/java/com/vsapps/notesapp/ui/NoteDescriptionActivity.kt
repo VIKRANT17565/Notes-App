@@ -19,6 +19,7 @@ class NoteDescriptionActivity : AppCompatActivity() {
 
         val title = intent.getStringExtra("title").toString()
         var note = intent.getStringExtra("note").toString()
+        var dateTime = intent.getStringExtra("dateTime").toString()
         val noteEntity:NoteEntity = intent.getSerializableExtra("noteEntity") as NoteEntity
         if (note.isEmpty()){
             note = "No description"
@@ -32,6 +33,8 @@ class NoteDescriptionActivity : AppCompatActivity() {
         val noteText:TextView = findViewById(R.id.note)
         noteText.text = note
 
+        val dateTimeText:TextView = findViewById(R.id.dateTime)
+        dateTimeText.text = dateTime
 
         deleteNote.setOnClickListener {
             viewModel  = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[NoteViewModel::class.java]
