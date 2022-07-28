@@ -8,7 +8,7 @@ The app will also push a notification on your smartphone whenever the note hit t
 ## Features
 
 - Support light/dark mode
-- Easy to create notes and remindes
+- Easy to create notes and reminders
 - Push notifications
 
 ## Screenshots
